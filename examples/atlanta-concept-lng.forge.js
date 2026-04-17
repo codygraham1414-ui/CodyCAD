@@ -58,7 +58,7 @@ function zigzagFence(x0, y0, w, d, segs) {
     const skew = (i % 2 === 0) ? 8 : -8;
     const panel = box(panelLen, panelThk, panelH)
       .translate(px, py, panelH / 2)
-      .rotate(0, 0, rotZ + skew)
+      .rotate([0, 0, 1], rotZ + skew)
       .color("#555555");
     parts.push(panel);
   }
@@ -80,7 +80,7 @@ function arrow(x, y, dirDeg, size) {
     .extrude(0.05)
     .translate(shaftL / 2, 0, 0);
   return union(shaft, head)
-    .rotate(0, 0, dirDeg)
+    .rotate([0, 0, 1], dirDeg)
     .translate(x, y, 0.03)
     .color("#ffffff");
 }
@@ -105,7 +105,7 @@ function tankerQueen(x, y) {
   // Horizontal cylinder, axis along Y. Dome caps + saddles.
   const parts = [];
   const body = cylinder(tankerLen, tankerRad, tankerRad, 32, true)
-    .rotate(90, 0, 0)
+    .rotate([1, 0, 0], 90)
     .translate(0, 0, tankerRad + tankerHt)
     .color("#c8c8d0");
   parts.push(body);
@@ -127,12 +127,12 @@ function refuelingTruck(x, y) {
   // Wheels (6 total, 3 per side)
   for (let i = 0; i < 3; i++) {
     const wy = -bodyL / 2 + 8 + i * 15;
-    parts.push(cylinder(1.2, 1.8, 1.8, 20, true).rotate(0, 90, 0).translate( bodyW / 2 + 0.3, wy, 1.8).color("#1a1a1a"));
-    parts.push(cylinder(1.2, 1.8, 1.8, 20, true).rotate(0, 90, 0).translate(-bodyW / 2 - 0.3, wy, 1.8).color("#1a1a1a"));
+    parts.push(cylinder(1.2, 1.8, 1.8, 20, true).rotate([0, 1, 0], 90).translate( bodyW / 2 + 0.3, wy, 1.8).color("#1a1a1a"));
+    parts.push(cylinder(1.2, 1.8, 1.8, 20, true).rotate([0, 1, 0], 90).translate(-bodyW / 2 - 0.3, wy, 1.8).color("#1a1a1a"));
   }
   // Cab wheels
-  parts.push(cylinder(1.2, 1.8, 1.8, 20, true).rotate(0, 90, 0).translate( bodyW / 2 + 0.3, bodyL / 2 + 7, 1.8).color("#1a1a1a"));
-  parts.push(cylinder(1.2, 1.8, 1.8, 20, true).rotate(0, 90, 0).translate(-bodyW / 2 - 0.3, bodyL / 2 + 7, 1.8).color("#1a1a1a"));
+  parts.push(cylinder(1.2, 1.8, 1.8, 20, true).rotate([0, 1, 0], 90).translate( bodyW / 2 + 0.3, bodyL / 2 + 7, 1.8).color("#1a1a1a"));
+  parts.push(cylinder(1.2, 1.8, 1.8, 20, true).rotate([0, 1, 0], 90).translate(-bodyW / 2 - 0.3, bodyL / 2 + 7, 1.8).color("#1a1a1a"));
   return union(...parts).translate(x, y, 0);
 }
 
@@ -162,8 +162,8 @@ function lcharge(x, y) {
   // 6 wheels along long axis (3 per side)
   for (let i = 0; i < 3; i++) {
     const wx = -trailerLen / 2 + 8 + i * 15;
-    parts.push(cylinder(1.0, 1.8, 1.8, 20, true).rotate(90, 0, 0).translate(wx,  trailerWid / 2 + 0.2, 1.8).color("#1a1a1a"));
-    parts.push(cylinder(1.0, 1.8, 1.8, 20, true).rotate(90, 0, 0).translate(wx, -trailerWid / 2 - 0.2, 1.8).color("#1a1a1a"));
+    parts.push(cylinder(1.0, 1.8, 1.8, 20, true).rotate([1, 0, 0], 90).translate(wx,  trailerWid / 2 + 0.2, 1.8).color("#1a1a1a"));
+    parts.push(cylinder(1.0, 1.8, 1.8, 20, true).rotate([1, 0, 0], 90).translate(wx, -trailerWid / 2 - 0.2, 1.8).color("#1a1a1a"));
   }
   return union(...parts).translate(x, y, 0);
 }
@@ -224,7 +224,7 @@ function gasLine() {
   const pipeR = 0.5;
   const startX = fuelX0 + 80, startY = fuelY0 + 95, pipeZ = 3;
   const pipe = cylinder(gasLineLen, pipeR, pipeR, 20, true)
-    .rotate(0, 90, 0)
+    .rotate([0, 1, 0], 90)
     .translate(startX + gasLineLen / 2, startY, pipeZ)
     .color("#2ecc40");
   parts.push(pipe);
@@ -333,7 +333,7 @@ function siteLabels() {
   // HARVESTER ST label flat on the street (rotated 90 to run along the street)
   parts.push(text2d("HARVESTER ST", { size: 4, align: "center", baseline: "middle" })
       .extrude(0.08)
-      .rotate(0, 0, 90)
+      .rotate([0, 0, 1], 90)
       .translate(-15, siteD / 2, 0.05)
       .color("#ffffff"));
   return union(...parts);
