@@ -5,8 +5,8 @@
 // ─── Parameters ───────────────────────────────────────────────────────────────
 const siteW          = param("Site Width (ft)",                400, { min: 300, max: 600, unit: "ft" });
 const siteD          = param("Site Depth (ft)",                275, { min: 200, max: 400, unit: "ft" });
-const setback50      = param("50' Setback (ft)",                50, { min: 20,  max: 80,  unit: "ft" });
-const setback25      = param("25' Setback (ft)",                25, { min: 10,  max: 50,  unit: "ft" });
+const setback50      = param("50ft Setback",                50, { min: 20,  max: 80,  unit: "ft" });
+const setback25      = param("25ft Setback",                25, { min: 10,  max: 50,  unit: "ft" });
 const trailerLen     = param("L-Charge Trailer Length (ft)",    50, { min: 30,  max: 70,  unit: "ft" });
 const trailerWid     = param("L-Charge Trailer Width (ft)",     10, { min: 6,   max: 14,  unit: "ft" });
 const trailerHt      = param("L-Charge Trailer Height (ft)",    11, { min: 8,   max: 14,  unit: "ft" });
@@ -322,13 +322,13 @@ function siteLabels() {
       .extrude(0.08)
       .translate(x, y, 0.05)
       .color(color);
-  parts.push(mk("50' 15,000 GAL QUEEN TANKER",   fuelX0 + 70, fuelY0 + 68,  2.0, "#ffffff"));
+  parts.push(mk("50 FT 15,000 GAL QUEEN TANKER", fuelX0 + 70, fuelY0 + 68,  2.0, "#ffffff"));
   parts.push(mk("VAPORIZER",                     fuelX0 + 80, fuelY0 + 110, 1.8, "#ffffff"));
-  parts.push(mk("GAS DISTRIBUTION LINE ~150'",   fuelX0 + 160, fuelY0 + 99, 1.8, "#2ecc40"));
-  parts.push(mk("50' PROP. LINE SETBACK",        siteW / 2, setback50 - 3,  2.0, "#33cccc"));
-  parts.push(mk("25' PROP. LINE SETBACK",        siteW / 2, setback50 + setback25 - 3, 2.0, "#33cccc"));
-  parts.push(mk("9'-6\"",                        40 + stallW / 2, 225 - 3, 1.2, "#ffffff"));
-  parts.push(mk("18'",                           40 - 3, 225 + stallL / 2, 1.2, "#ffffff"));
+  parts.push(mk("GAS DISTRIBUTION LINE ~150 FT", fuelX0 + 160, fuelY0 + 99, 1.8, "#2ecc40"));
+  parts.push(mk("50 FT PROP. LINE SETBACK",      siteW / 2, setback50 - 3,  2.0, "#33cccc"));
+  parts.push(mk("25 FT PROP. LINE SETBACK",      siteW / 2, setback50 + setback25 - 3, 2.0, "#33cccc"));
+  parts.push(mk("9 FT 6 IN",                     40 + stallW / 2, 225 - 3, 1.2, "#ffffff"));
+  parts.push(mk("18 FT",                         40 - 3, 225 + stallL / 2, 1.2, "#ffffff"));
   parts.push(mk("FUELING AREA PERIMETER FENCING", fuelX0 + fuelW / 2, fuelY0 - 4, 1.8, "#cccccc"));
   // HARVESTER ST label flat on the street (rotated 90 to run along the street)
   parts.push(text2d("HARVESTER ST", { size: 4, align: "center", baseline: "middle" })
@@ -362,8 +362,8 @@ const annotations  = siteLabels();
 return [
   { name: "Ground Slab",             shape: ground,         color: "#2b2b2b" },
   { name: "Property Line",           shape: propLine,       color: "#d11e1e" },
-  { name: "50' Setback (dashed)",    shape: setback50Rect,  color: "#33cccc" },
-  { name: "25' Setback (dashed)",    shape: setback25Rect,  color: "#33cccc" },
+  { name: "50 FT Setback (dashed)",  shape: setback50Rect,  color: "#33cccc" },
+  { name: "25 FT Setback (dashed)",  shape: setback25Rect,  color: "#33cccc" },
   { name: "Harvester St",            shape: street,         color: "#3a3a3a" },
   { name: "Fueling Area Fence",      shape: fence,          color: "#555555" },
   { name: "Fueling Equipment",       shape: fuelEquip,      color: "#c8c8d0" },
